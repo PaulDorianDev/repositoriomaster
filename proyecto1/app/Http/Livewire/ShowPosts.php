@@ -26,9 +26,10 @@ class ShowPosts extends Component
     }
 
     public function order($sort){
+
         if($this->sort == $sort){
             if($this->direction == 'desc'){
-                $this->direction == 'asc';
+                $this->direction = 'asc';
 
             }
             else{
@@ -37,7 +38,7 @@ class ShowPosts extends Component
 
         }
         else{
-            $this->sort == $sort;
+            $this->sort = $sort;
         }
 
     }
