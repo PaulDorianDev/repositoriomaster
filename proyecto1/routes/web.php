@@ -20,8 +20,6 @@ use App\Http\Livewire\ShowPosts;
 Route::get('/', function(){
     return view('welcome');
 });
-//Route::get('/post', [PostController::class, 'index']);
-//Route::get('/posts', [PostController::class, 'index'])->name('posts');
 
 Route::get('/show/{post}', [PostController::class, 'show'])->name('show');
 Route::get('/delete/{post}', [PostController::class, 'destroy'])->name('delete');
