@@ -38,6 +38,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required'
+        ]);
+
     $post = Post::create(array_merge($request->all(), ['user_id' => $request->user()->id]));
     return redirect()->route('show', ['post' => $post]); //
     }
@@ -62,6 +67,7 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
+
        return view('posts.edit', compact('post')); //
     }
 
@@ -73,17 +79,21 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request)
-    { 
+    {
         //$post = array_merge($request->all(), ['user_id' => $request->user()->id] );
+        $request->validate([
+            'title' => 'required|max:20',
+            'body' => 'required'
+        ]);
 
-        $update = ['user_id' => Auth::user()->id, 
+        $update = ['user_id' => Auth::user()->id,
                    'title' => $request->title,
                    'body' => $request->body,
     ];
         $id = $request->prodId;
         $post = Post::find($id);
         $post->update($update);
-    return redirect()->route('dashboard'); 
+    return redirect()->route('dashboard');
     }
 
     /**
