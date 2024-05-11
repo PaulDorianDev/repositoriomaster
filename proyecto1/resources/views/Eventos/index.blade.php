@@ -6,18 +6,16 @@
 
     <section class="py-1 bg-blueGray-50">
     <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
-      <td> <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" href="{{ route('eventos') }}">Eventos</a></td>
-
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
             <div class="flex flex-wrap items-center">
              <input class=" mx-10 w-full" type="text" wire:model="search">
             </div>
             <div>
-            <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" href="{{ route('create') }}">Crear</a>
+            <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" href="{{ route('evento-create') }}">Crear</a>
             </div>
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
-            @if($posts->count())
+            @if($eventos->count())
 
 
             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -27,20 +25,28 @@
                   class="px-6 bg-blueGray-50 text-blueGray-500 align-middle border border-solid border-blueGray-100 py-3 text-xs uppercase border-l-0 border-r-0 font-semibold">
                   <tr>
                     <th scope="col" wire:click="order('id')" class=" cursor-pointer px-6 py-4">#</th>
-                    <th scope="col" wire:click="order('title')" class=" cursor-pointer px-6 py-4">Título</th>
-                    <th scope="col" wire:click="order('body')" class=" cursor-pointer px-6 py-4">Contenido</th>
+                    <th scope="col" wire:click="order('nombre')" class=" cursor-pointer px-6 py-4">Nombre</th>
+                    <th scope="col" wire:click="order('desc')" class=" cursor-pointer px-6 py-4">Descripción</th>
+                    <th scope="col" wire:click="order('fecha')" class=" cursor-pointer px-6 py-4">Fecha</th>
+                    <th scope="col" wire:click="order('lugar')" class=" cursor-pointer px-6 py-4">Lugar</th>
+                    <th scope="col" class=" cursor-pointer px-6 py-4">Foto</th>
+
                     <th scope="col"  class=" cursor-pointer px-6 py-4">Acciones</th>
                   </tr>
                 </thead>
                 <tbody>
-                    @foreach($posts as $post)
+                    @foreach($eventos as $evento)
 
 
                   <tr class="border-b border-neutral-200 dark:border-white/10 px-6">
-                    <td> {{ $post->id }}</td>
-                    <td> {{ $post->title }}</td>
-                    <td> {{ $post->body}}</td>
-                    <td> <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" href="{{ route('show', ['post' => $post]) }}">Mostrar</a></td>
+                    <td> {{ $evento->id }}</td>
+                    <td> {{ $evento->nombre }}</td>
+                    <td> {{ $evento->desc}}</td>
+                    <td> {{ $evento->fecha}}</td>
+                    <td> {{ $evento->lugar}}</td>
+                    <td> {{ $evento->foto}}</td>
+                    <td> <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                        href="{{ route('evento-mostrar', ['evento' => $evento]) }}">Mostrar</a></td>
 
                   </tr>
                   @endforeach
