@@ -15,7 +15,6 @@ class ShowEvents extends Component
     public function render()
     {
 
-
         $eventos = Evento::where('nombre', 'like','%'. $this->search . '%')
         ->orWhere('desc', 'like','%'. $this->search . '%')
         ->orWhere('fecha', 'like','%'. $this->search . '%')
