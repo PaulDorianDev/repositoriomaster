@@ -7,9 +7,6 @@
 
 <div class="py-1 bg-blueGray-50">
 
-    <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 my-2 mx-2 rounded mr-1 mb-1 ease-linear"
-    href="{{ route('eventos') }}"> <- Volver</a>
-
     <div class="max-w-md mx-auto mt-6 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl w-96">
 
         <div class="p-6">
@@ -29,28 +26,37 @@
             <p class="block mb-2 font-sans text-base antialiased font-light leading-relaxed text-inherit">
                 {{ $evento->lugar }}
             </p>
-            
+
+            @if (empty($evento->foto) )
             <p class="block mb-2 font-sans text-base antialiased font-light leading-relaxed text-inherit">
-            <img src="{{$evento->foto}}">
-            </p>
+                <img src="{{ asset('eventos/default_event.jpeg') }}">
+                </p>
+
+            @else
+            <p class="block mb-2 font-sans text-base antialiased font-light leading-relaxed text-inherit">
+                <img src="{{ asset('eventos/'.$evento->foto) }}">
+                </p>
+
+            @endif
+
         </div>
 
-        <div>
-                <div class="mx-2 my-2">
-                    <form  method="GET" action="{{ route('evento-edit', ['evento' => $evento->id])}}">
+        <div class="columns-2">
+                    <form class="grid justify-items-center" method="GET" action="{{ route('evento-edit', ['evento' => $evento->id])}}">
                         @csrf
-                        <button class="select-none font-sans font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-black text-white"
+                        <button class=" select-none font-sans font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-black text-white"
                         type ="submit"> Editar </button>
                     </form>
-                </div>
-                <div class="mx-2 my-2">
-                    <form action="{{ route('evento-delete', ['evento' => $evento->id]) }}">
+                    <form class="grid justify-items-center" action="{{ route('evento-delete', ['evento' => $evento->id]) }}">
                         @csrf
-                        <button class="select-none font-sans font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-black text-white"
+                        <button class=" select-none font-sans font-bold text-center uppercase text-xs py-3 px-6 rounded-lg bg-red-500 text-white"
                         type ="submit"> Eliminar </button>
                         </form>
+        </div>
+                <div class="grid justify-items-center">
+                    <a class="  bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase rounded px-2 py-2 mr-1 mb-1 "
+                    href="{{ route('ruta-eventos') }}"> <- Volver</a>
                 </div>
 
-        </div>
     </div>
 </div>

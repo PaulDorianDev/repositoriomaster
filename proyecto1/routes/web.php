@@ -33,7 +33,7 @@ Route::get('/edit/{post}', [PostController::class, 'edit'])->name('edit');
 Route::post('/update', [PostController::class, 'update'])->name('update');
 
 
-Route::get('/eventos', ShowEvents::class)->name('eventos');
+Route::get('/ruta-eventos', ShowEvents::class)->name('ruta-eventos');
 //Route::get('/eventos', [EventoController::class, 'index'])->name('eventos');
 Route::get('/evento-mostrar/{evento}', [EventoController::class, 'show'])->name('evento-mostrar');
 Route::get('/evento-delete/{evento}', [EventoController::class, 'destroy'])->name('evento-delete');

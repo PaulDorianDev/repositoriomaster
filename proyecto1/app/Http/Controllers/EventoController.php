@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Evento;
 use Illuminate\Http\Request;
 use Image;
-
+use Session;
 class EventoController extends Controller
 {
     public function index()
@@ -22,6 +22,8 @@ class EventoController extends Controller
 
     public function store(Request $request)
     {
+
+        Session::flash('mensaje', 'El registro se ha creado satisfactoriamente');
 
         $request->validate([
             'nombre' => 'required',
@@ -43,14 +45,15 @@ class EventoController extends Controller
         $temp_name = $request->nombre . '.' . $imagen->getClientOriginalExtension();
 
         // guardar imagen
-        $imagen->save($ruta . $temp_name, 100);
+        $imagenCon->save($ruta . $temp_name, 100);
         $evento->foto = $temp_name;
+        $evento->save();
     } else {
         $evento->foto = 'default-event.png';
     }
 
 
-    return redirect()->route('eventos'); //
+    return redirect()->route('ruta-eventos'); //
     }
 
     public function show(Evento $evento)
@@ -67,12 +70,13 @@ class EventoController extends Controller
 
     public function update(Request $request)
     {
+        Session::flash('mensaje', 'El registro se ha modificado satisfactoriamente');
+
         $request->validate([
             'nombre' => 'required|max:20',
             'desc' => 'required',
             'lugar' => 'required',
             'fecha' => 'required',
-            'foto' => 'required|image',
         ]);
 
         $update = [ 'title' => $request->title,
@@ -82,17 +86,21 @@ class EventoController extends Controller
                     'foto' => $request->foto,
                     ];
 
+
+        dd($request->foto);
         $id = $request->prodId;
         $evento = Evento::find($id);
         $evento->update($update);
-        return redirect()->route('eventos');
+        return redirect()->route('ruta-eventos');
     }
 
 
     public function destroy(Evento $evento)
     {
+    Session::flash('mensaje', 'El registro se ha eliminado satisfactoriamente');
+
        $evento->delete();
-       return redirect()->route('eventos');//
+       return redirect()->route('ruta-eventos');//
     }
 }
 

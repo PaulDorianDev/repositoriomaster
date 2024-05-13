@@ -5,14 +5,30 @@
 
 
     <section class="py-1 bg-blueGray-50">
+        @if (Session::has('mensaje'))
+
+        <div class="grid justify-items-center bg-indigo-500 text-white">
+            <div class="m-2">
+                {{ Session::get('mensaje') }}
+            </div>
+        </div>
+
+        @endif
+
+
     <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4 mx-auto mt-24">
       <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-            <div class="flex flex-wrap items-center">
-             <input class=" mx-10 w-full" type="text" wire:model="search">
+            <div class="items-center">
+
+
+             <div class="mt-4">
+                <a class="ml-2 bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" href="{{ route('evento-create') }}">Crear</a>
+                </div>
+
+             <input class=" ml-2 mr-4 my-4" type="text" wire:model="search">
+
             </div>
-            <div>
-            <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" href="{{ route('evento-create') }}">Crear</a>
-            </div>
+
         <div class="rounded-t mb-0 px-4 py-3 border-0">
           <div class="flex flex-wrap items-center">
             @if($eventos->count())
@@ -38,14 +54,14 @@
                     @foreach($eventos as $evento)
 
 
-                  <tr class="border-b border-neutral-200 dark:border-white/10 px-6">
-                    <td> {{ $evento->id }}</td>
-                    <td> {{ $evento->nombre }}</td>
-                    <td> {{ $evento->desc}}</td>
-                    <td> {{ $evento->fecha}}</td>
-                    <td> {{ $evento->lugar}}</td>
-                    <td> {{ $evento->foto}}</td>
-                    <td> <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  <tr class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4">
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4" > {{ $evento->id }}</td>
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4"> {{ $evento->nombre }}</td>
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4"> {{ $evento->desc}}</td>
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4"> {{ $evento->fecha}}</td>
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4"> {{ $evento->lugar}}</td>
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4"> {{ $evento->foto}}</td>
+                    <td class="border-b border-neutral-200 dark:border-white/10 px-6 mx-4"> <a class="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                         href="{{ route('evento-mostrar', ['evento' => $evento]) }}">Mostrar</a></td>
 
                   </tr>
